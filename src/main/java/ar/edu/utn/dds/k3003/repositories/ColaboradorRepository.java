@@ -2,27 +2,27 @@ package ar.edu.utn.dds.k3003.repositories;
 
 import ar.edu.utn.dds.k3003.model.Colaborador;
 
+import javax.persistence.EntityManager;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ColaboradorRepository {
   private static AtomicLong seqId = new AtomicLong();
-  private final Collection<Colaborador> colaboradores;
+  private final EntityManager entityManager;
 
-  public ColaboradorRepository() {
-    this.colaboradores = new ArrayList<>();
+  public ColaboradorRepository(final EntityManager entityManager) {
+    this.entityManager = entityManager;
   }
 
-  public Colaborador save(Colaborador colaborador) {
+  public void save(Colaborador colaborador) {
     if(Objects.isNull(colaborador.getID())) {
       colaborador.setID(seqId.getAndIncrement());
-      this.colaboradores.add(colaborador);
+      entityManager.persist(colaborador);
     }
-    return colaborador;
   }
 
   public Colaborador findById(Long id) {
-    Optional<Colaborador> first = colaboradores.stream().filter(colaborador -> colaborador.getID().equals(id)).findFirst();
+    Optional<Colaborador> first = Optional.ofNullable(entityManager.find(Colaborador.class, id));
     return first.orElseThrow(() -> new NoSuchElementException("No se encontro el colaborador con el id: " + id));
   }
 }

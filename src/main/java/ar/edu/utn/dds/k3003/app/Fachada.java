@@ -12,6 +12,9 @@ import ar.edu.utn.dds.k3003.repositories.ColaboradorRepository;
 import ar.edu.utn.dds.k3003.repositories.DistribucionDeViandaMapper;
 import ar.edu.utn.dds.k3003.repositories.DonacionDeViandaMapper;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -20,9 +23,13 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaColaboradore
   ColaboradorMapper colaboradorMapper;
   FachadaLogistica facadeLogistica;
   FachadaViandas facadeViandas;
+  private EntityManagerFactory entityManagerFactory;
+  private EntityManager entityManager;
 
   public Fachada(){
-    this.colaboradorRepository = new ColaboradorRepository();
+    this.entityManagerFactory = Persistence.createEntityManagerFactory("colaboradoresdb");
+    this.entityManager = entityManagerFactory.createEntityManager();
+    this.colaboradorRepository = new ColaboradorRepository(entityManager);
     this.colaboradorMapper = new ColaboradorMapper();
   }
 
