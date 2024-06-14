@@ -1,7 +1,7 @@
 package ar.edu.utn.dds.k3003.client;
 
+import ar.edu.utn.dds.k3003.app.WebApp;
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoViandaEnum;
-import ar.edu.utn.dds.k3003.facades.dtos.TrasladoDTO;
 import ar.edu.utn.dds.k3003.facades.dtos.ViandaDTO;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -23,16 +23,14 @@ public class ViandaTestServer {
     var port = Integer.parseInt(env.getOrDefault("PORT", "8081"));
 
     var app = Javalin.create(config -> {
-      config.jsonMapper(new JavalinJackson().updateMapper(mapper -> {
-        configureObjectMapper(mapper);
-      }));
+      config.jsonMapper(new JavalinJackson().updateMapper(WebApp::configureObjectMapper));
     }).start(port);
 
     app.get("/viandas/search/findByColaboradorIdAndAnioAndMes", ViandaTestServer::viandasDonadasTest);
   }
 
   private static void viandasDonadasTest(Context context) {
-    if(context.queryParam("colaboradorId").equals("0")) {
+    if(context.queryParam("colaboradorId").equals("1")) {
       List<ViandaDTO> viandas = new ArrayList<>();
       var unaDonacion = new ViandaDTO("unQRQueExiste", LocalDateTime.now(), EstadoViandaEnum.PREPARADA, 0L, 1);
       var otraDonacion = new ViandaDTO("otroQRQueExiste", LocalDateTime.now(), EstadoViandaEnum.PREPARADA, 0L, 1);

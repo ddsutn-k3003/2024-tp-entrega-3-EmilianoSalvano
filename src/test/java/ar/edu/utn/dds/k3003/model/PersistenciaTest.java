@@ -1,4 +1,4 @@
-package ar.edi.utn.dds.k3003.model;
+package ar.edu.utn.dds.k3003.model;
 
 
 import org.junit.jupiter.api.BeforeAll;

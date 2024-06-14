@@ -1,8 +1,7 @@
-package ar.edi.utn.dds.k3003.client;
+package ar.edu.utn.dds.k3003.client;
 
 import static ar.edu.utn.dds.k3003.app.WebApp.configureObjectMapper;
 
-import ar.edu.utn.dds.k3003.client.ViandaTestServer;
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoTrasladoEnum;
 import ar.edu.utn.dds.k3003.facades.dtos.TrasladoDTO;
 import io.javalin.Javalin;
@@ -30,7 +29,7 @@ public class LogisticaTestServer {
   }
 
   private static void trasladosTest(Context context) {
-    if(context.queryParam("colaboradorId").equals("0")) {
+    if(context.queryParam("colaboradorId").equals("1")) {
       List<TrasladoDTO> traslados = new ArrayList<>();
       var unTraslado = new TrasladoDTO("unQr", EstadoTrasladoEnum.ENTREGADO, LocalDateTime.now(), 1, 2);
       unTraslado.setId(1L);

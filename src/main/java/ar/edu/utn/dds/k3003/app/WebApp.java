@@ -27,6 +27,8 @@ public class WebApp {
 
       ColaboradorController colaboradorController = new ColaboradorController(fachada);
 
+      configuracionInicial(fachada);
+
       app.get("/", ctx -> ctx.result("Hello World"));
       app.get("/colaboradores/{id}", colaboradorController::getColaborador);
       app.post("/colaboradores", colaboradorController::crearColaborador);
@@ -48,5 +50,9 @@ public class WebApp {
         var sdf = new SimpleDateFormat(Constants.DEFAULT_SERIALIZATION_FORMAT, Locale.getDefault());
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         objectMapper.setDateFormat(sdf);
+    }
+
+    public static void configuracionInicial(Fachada fachada) {
+        fachada.actualizarPesosPuntos(1D, 1D, 1D, 1D, 1D);
     }
 }
