@@ -3,10 +3,12 @@ package ar.edu.utn.dds.k3003.model;
 import ar.edu.utn.dds.k3003.facades.dtos.FormaDeColaborarEnum;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.ArrayList;
@@ -20,8 +22,8 @@ public class Colaborador {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long ID;
 
-  //@Column(name = "formas_de_colaborar")
-  @Transient
+  @Column
+  @Convert(converter = ConversorFormasDeColaborar.class)
   private List<FormaDeColaborarEnum> formasDeColaborar;
 
   @Column(name = "nombre")
