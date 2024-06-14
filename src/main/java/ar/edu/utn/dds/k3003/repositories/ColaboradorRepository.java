@@ -7,7 +7,6 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ColaboradorRepository {
-  private static AtomicLong seqId = new AtomicLong();
   private final EntityManager entityManager;
 
   public ColaboradorRepository(final EntityManager entityManager) {
@@ -16,8 +15,9 @@ public class ColaboradorRepository {
 
   public void save(Colaborador colaborador) {
     if(Objects.isNull(colaborador.getID())) {
-      colaborador.setID(seqId.getAndIncrement());
+      entityManager.getTransaction().begin();
       entityManager.persist(colaborador);
+      entityManager.getTransaction().commit();
     }
   }
 
