@@ -10,6 +10,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -55,7 +56,8 @@ public class ViandasProxy implements FachadaViandas {
       return execute.body();
     }
     if (execute.code() == HttpStatus.NOT_FOUND.getCode()) {
-      throw new NoSuchElementException("no se encontro donaciones de vianda para el id: " + id);
+      //throw new NoSuchElementException("no se encontro donaciones de vianda para el id: " + id);
+      return new ArrayList<>();
     }
     throw new RuntimeException("Error conectandose con el componente viandas");
   }
