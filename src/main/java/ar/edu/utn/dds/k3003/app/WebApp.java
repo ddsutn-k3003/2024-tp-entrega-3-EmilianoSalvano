@@ -35,6 +35,8 @@ public class WebApp {
       app.patch("/colaboradores/{id}", colaboradorController::modificarColaborador);
       app.get("/colaboradores/{id}/puntos", colaboradorController::getPuntuacionColaborador);
       app.put("/formula", colaboradorController::modificarPuntuacionMultiplicador);
+
+      app.post("/borrarTodaLaBase", colaboradorController::borrarTodaLaBase);
     }
 
     public static ObjectMapper createObjectMapper() {

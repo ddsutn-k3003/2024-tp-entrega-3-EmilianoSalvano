@@ -94,4 +94,10 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaColaboradore
   public void setViandasProxy(FachadaViandas fachadaViandas) {
     this.facadeViandas = fachadaViandas;
   }
+
+  public void borrarTodaLaBase() {
+    entityManager.getTransaction().begin();
+    entityManager.createNativeQuery("TRUNCATE TABLE Colaboradores").executeUpdate();
+    entityManager.getTransaction().commit();
+  }
 }

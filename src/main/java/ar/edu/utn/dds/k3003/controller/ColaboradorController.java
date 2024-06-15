@@ -7,6 +7,8 @@ import ar.edu.utn.dds.k3003.model.FormasDTO;
 import ar.edu.utn.dds.k3003.model.FormulaDTO;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -83,4 +85,11 @@ public class ColaboradorController {
     }
   }
 
+  public void borrarTodaLaBase(Context context) {
+    try {
+      fachada.borrarTodaLaBase();
+    } catch (Exception e) {
+      System.out.println("Error al borrar la base de datos: " + e.getMessage());
+    }
+  }
 }
