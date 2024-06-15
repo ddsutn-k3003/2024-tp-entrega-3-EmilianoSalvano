@@ -56,13 +56,13 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaColaboradore
     Colaborador colaborador = colaboradorRepository.findById(colaboradorId);
 
     List<TrasladoDTO> distribucionesDTO = facadeLogistica.trasladosDeColaborador(colaboradorId, 1, 2024);
-    //List<ViandaDTO> donacionesDTO = facadeViandas.viandasDeColaborador(colaboradorId,1,2024);
+    List<ViandaDTO> donacionesDTO = facadeViandas.viandasDeColaborador(colaboradorId,2024,1);
     DistribucionDeViandaMapper mapperDistribucion = new DistribucionDeViandaMapper();
     DonacionDeViandaMapper mapperDonacion = new DonacionDeViandaMapper();
     Double puntos = 0D;
     //Mapeo cada viandaDTO a una DonacionDeVianda y después sumo los puntos
 
-    //puntos += donacionesDTO.stream().map(mapperDonacion::desdeDTO).map(DonacionDeVianda::getPuntaje).reduce(0.0, Double::sum);
+    puntos += donacionesDTO.stream().map(mapperDonacion::desdeDTO).map(DonacionDeVianda::getPuntaje).reduce(0.0, Double::sum);
     //Mapeo cada trasladoDTO a una DistribucionDeVianda y después sumo los puntos
     puntos += distribucionesDTO.stream().map(mapperDistribucion::desdeDTO).map(DistribucionDeVianda::getPuntaje).reduce(0.0, Double::sum);
 

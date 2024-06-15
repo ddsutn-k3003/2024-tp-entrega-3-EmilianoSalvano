@@ -18,12 +18,13 @@ public class WebApp {
 
       Fachada fachada = new Fachada();
       var env = System.getenv();
-      var port = Integer.parseInt(env.getOrDefault("PORT", "8080"));
-      var app = Javalin.create().start(port);
       var objectMapper = createObjectMapper();
 
       fachada.setViandasProxy(new ViandasProxy(objectMapper));
       fachada.setLogisticaProxy(new LogisticaProxy(objectMapper));
+
+      var port = Integer.parseInt(env.getOrDefault("PORT", "8080"));
+      var app = Javalin.create().start(port);
 
       ColaboradorController colaboradorController = new ColaboradorController(fachada);
 
